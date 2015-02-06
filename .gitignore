@@ -3,3 +3,4 @@ tangowithdjango/settings.py
 **/*.pyc
 **/*~
 .idea
+db.sqlite3
