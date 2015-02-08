@@ -1,6 +1,8 @@
 # Create your views here.
 from django.shortcuts import render
 
+from rango.forms import CategoryForm, PageForm
+
 from rango.models import Category, Page
 
 
@@ -25,6 +27,41 @@ def category(request, cat_name_slug):
         pass
 
     return render(request, 'rango/category.html', context_dict)
+
+
+def add_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = CategoryForm()
+
+    return render(request, 'rango/add_category.html', {'form': form})
+
+
+def add_page(request, cat_slug):
+
+    try:
+        cat = Category.objects.get(slug=cat_slug)
+    except:
+        cat = None
+
+    if request.method == 'POST':
+        form = PageForm(request.POST)
+        if form.is_valid():
+            if cat:
+                page = form.save(commit=False)
+                page.category = cat
+                page.views=0
+                page.save()
+                return index(request)
+    else:
+        form = PageForm()
+    return render(request, 'rango/add_page.html', {'form': form, 'category' : cat})
 
 
 def about(request):

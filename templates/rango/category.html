@@ -13,12 +13,14 @@
                 <li><a href="{{ page.url }}">{{ page.title }}</a></li>
             {% endfor %}
         </ul>
+        <a href="/rango/add_page/{{ category.slug }}">add page</a>
     {% else %}
         <strong>No pages currently in category.</strong>
     {% endif %}
 {% else %}
     The specified category {{ cat_name }} does not exist!
 {% endif %}
+<br>
 <a href="/rango/">Index</a>
 </body>
 </html>
