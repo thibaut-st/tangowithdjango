@@ -6,15 +6,36 @@
     <title>Index page</title>
 </head>
 <body>
-    <p>Hello World.</p>
-    <br>
-    <p>{{ test_message }}</p>
-    <br>
-    <br>
-    <a href="/rango/about/">About</a>
-    <br>
-    <p>Test static files</p>
-    <br>
-    <img src="{% static "images/1.jpg" %}"x>
+<p>Hello World.</p>
+<br>
+{% if categories %}
+    <p>Categories: </p>
+    <ul>
+        {% for category in categories %}
+            <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a> - likes : {{ category.likes }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No categories.</p>
+{% endif %}
+{% if pages %}
+    <p>Pages: </p>
+    <ul>
+    {% for page in pages %}
+        <li>
+            <a href="{{ page.url }}">{{ page.title }}</a> - views : {{ page.views }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+{% endif %}
+<br>
+<br>
+<a href="/rango/about/">About</a>
+<br>
+
+<p>Test static files</p>
+<br>
+<img src="{% static "images/1.jpg" %}" x>
 </body>
 </html>

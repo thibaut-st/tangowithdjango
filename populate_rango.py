@@ -50,6 +50,11 @@ def populate():
              title="Flask",
              url="http://flask.pocoo.org")
 
+    add_page(cat=frame_cat,
+             title="FuelPHP",
+             url="http://fuelphp.com/",
+             views=12)
+
     # Print out what we have added to the user.
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
