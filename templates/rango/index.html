@@ -6,13 +6,17 @@
     <title>Index page</title>
 </head>
 <body>
-<p>Hello World.</p>
-<br>
+{% if user.is_authenticated %}
+    <h1>Rango says... hello {{ user.username }}!</h1>
+{% else %}
+    <h1>Rango says... hello world!</h1>
+{% endif %}
 {% if categories %}
     <p>Categories: </p>
     <ul>
         {% for category in categories %}
-            <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a> - likes : {{ category.likes }}</li>
+            <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a> - likes : {{ category.likes }}
+            </li>
         {% endfor %}
     </ul>
 {% else %}
@@ -21,22 +25,30 @@
 {% if pages %}
     <p>Pages: </p>
     <ul>
-    {% for page in pages %}
-        <li>
-            <a href="{{ page.url }}">{{ page.title }}</a> - views : {{ page.views }}
-        </li>
-    {% endfor %}
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.url }}">{{ page.title }}</a> - views : {{ page.views }}
+            </li>
+        {% endfor %}
     </ul>
 {% else %}
 {% endif %}
 <br>
 <a href="/rango/add_category">Add a category</a>
 <br>
+{% if user.is_authenticated %}
+    <a href="/rango/logout/">Logout</a><br/>
+{% else %}
+    <a href="/rango/register/">Register Here</a><br/>
+    <a href="/rango/login/">Login</a><br/>
+{% endif %}
+
+<br>
 <a href="/rango/about/">About</a>
 <br>
 
 <p>Test static files</p>
 <br>
-<img src="{% static "images/1.jpg" %}" x>
+<img src="{% static "images/1.jpg" %}">
 </body>
 </html>
