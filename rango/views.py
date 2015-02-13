@@ -115,6 +115,6 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/rango/')
 
-
+@login_required
 def about(request):
     return render(request, 'rango/about.html')
