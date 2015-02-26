@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %}{{ cat_name }}{% endblock %}
-{% block body_block %}
+{% block content %}
     <h1>{{ cat_name }}</h1>
     {% if category %}
         {% if pages %}
