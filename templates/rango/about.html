@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
+
 {% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
 {% block content %}
-    <p>About page</p>
-    <img src="{% static "images/1.jpg" %}">
+    <div class="page-header">
+        <h1>About</h1>
+    </div>
+    <div>
+        <p>About page.</p>
+
+        <img width="500" src="{% static "images/1.jpg" %}" alt="Picture of Rango"/> <!-- New line -->
+    </div>
 {% endblock %}
